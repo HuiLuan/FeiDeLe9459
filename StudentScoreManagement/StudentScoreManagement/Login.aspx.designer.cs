@@ -10,7 +10,7 @@
 namespace StudentScoreManagement {
     
     
-    public partial class Regist {
+    public partial class Login {
         
         /// <summary>
         /// form1 控件。
@@ -40,12 +40,12 @@ namespace StudentScoreManagement {
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
         
         /// <summary>
-        /// btnRegister 控件。
+        /// btnLogin 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegister;
+        protected global::System.Web.UI.WebControls.Button btnLogin;
     }
 }

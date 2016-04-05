@@ -18,5 +18,12 @@ namespace StudentScoreManagement
                return conn.Execute(sqlStr);
             }
         }
+        public static IEnumerable<T> Query<T>(string sql)
+        {
+            using (var conn = new SqlConnection(sqlStr))
+            {
+                return conn.Query<T>(sqlStr);
+            }
+        }
     }
 }

@@ -15,12 +15,24 @@ namespace StudentScoreManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (
-                var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlDiagnosticsDb"].ConnectionString)
-                )
+        
+        }
+
+        protected void btnRegister_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtName.Text.Trim()))
             {
-                conn.Execute("");
+                HHWeb.Alert(this,"Name can not empty");
+                return;
             }
+            if (string.IsNullOrEmpty(txtPassword.Text.Trim()))
+            {
+                HHWeb.Alert(this,"Password can not empty");
+                return;
+            }
+            var sql = "insert into Student (Name,Password) values ('" + txtName.Text.Trim() + "','" + txtPassword.Text.Trim() + "')";
+            SqlHelper.Execute(sql);
+            //HHWeb.Alert(this,"");
         }
     }
 }
