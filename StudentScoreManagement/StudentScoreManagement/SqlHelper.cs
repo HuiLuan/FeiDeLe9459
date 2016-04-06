@@ -15,14 +15,14 @@ namespace StudentScoreManagement
         {
             using (var conn = new SqlConnection(sqlStr))
             {
-               return conn.Execute(sqlStr);
+               return conn.Execute(sql);
             }
         }
         public static IEnumerable<T> Query<T>(string sql)
         {
             using (var conn = new SqlConnection(sqlStr))
             {
-                return conn.Query<T>(sqlStr);
+                return conn.Query<T>(sql);
             }
         }
     }

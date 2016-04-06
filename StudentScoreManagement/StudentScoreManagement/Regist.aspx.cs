@@ -32,7 +32,7 @@ namespace StudentScoreManagement
             }
             var sql = "insert into Student (Name,Password) values ('" + txtName.Text.Trim() + "','" + txtPassword.Text.Trim() + "')";
             SqlHelper.Execute(sql);
-            //HHWeb.Alert(this,"");
+            HHWeb.Alert(this, "register succeed");
         }
     }
 }
