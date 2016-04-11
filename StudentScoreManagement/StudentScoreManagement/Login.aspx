@@ -25,13 +25,16 @@
             <div class="form-group row">
                 <label class="control-label col-md-4">Password</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txtPassword"  CssClass="form-control text-box single-line" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword"  CssClass="form-control text-box single-line" runat="server" TextMode="Password"></asp:TextBox>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="control-label col-md-4"></label>
                 <div class="col-md-4">
                     <asp:Button ID="btnLogin" CssClass="btn btn-info" runat="server" Text="Login" OnClick="btnLogin_Click"  />
+                    <span style="margin-left: 20px;"></span>
+                    <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl="Regist.aspx">Sign up</asp:HyperLink>
+
                 </div>
             </div>
 

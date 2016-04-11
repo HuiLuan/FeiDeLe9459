@@ -11,14 +11,23 @@ namespace StudentScoreManagement
 {
     public partial class ScoreEdit : System.Web.UI.Page
     {
-        
+        private StudentScore mScore;
         private long mId {
             get
             {
                 if (ViewState["mId"] == null)
                 {
-                    
+                    long id;
+                    if (long.TryParse(Request.QueryString["id"],out id))
+                    {
+                        ViewState["mId"] = id;
+                    }
+                    else
+                    {
+                        ViewState["mId"] = 0;
+                    }
                 }
+                return Convert.ToInt64(ViewState["mId"]);
             }
         }
 
@@ -26,8 +35,34 @@ namespace StudentScoreManagement
         {
             if (!IsPostBack)
             {
+
                 BindView();
+                if (mId > 0)
+                {
+                    mScore = SqlHelper.QueryStudentScore(scoreId: mId).FirstOrDefault();
+                    if (mScore != null)
+                    {
+                        AppToUi();
+                    }
+                    else
+                    {
+                        mScore = new StudentScore();
+                    }
+                }
+                else
+                {
+                    mScore=new StudentScore();
+                }
             }
+        }
+
+        private void AppToUi()
+        {
+            ddlCourse.Enabled = false;
+            ddlStudent.Enabled = false;
+            ddlCourse.Text = mScore.Course;
+            ddlStudent.Text = mScore.Student.Name;
+            txtScore.Text = mScore.Score;
         }
 
         private void BindView()
@@ -41,7 +76,21 @@ namespace StudentScoreManagement
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            
+            mScore.StudentId = Convert.ToInt64(ddlStudent.SelectedValue);
+            mScore.Course = ddlCourse.Text;
+            mScore.Score = txtScore.Text;
+            if (mId > 0)
+            {
+                string sql = "update StudentScore set Score='" + txtScore.Text + "' where Id='" + mId + "'";
+                SqlHelper.Execute(sql);
+                HHWeb.Alert(this,"save succeed");
+            }
+            else
+            {
+                string sql = "insert into StudentScore (StudentId,Course,Score) values ('"+ mScore.StudentId + "','"+ mScore.Course + "','"+ mScore.Score + "')";
+                SqlHelper.Execute(sql);
+                HHWeb.Alert(this, "save succeed");
+            }
         }
     }
 }

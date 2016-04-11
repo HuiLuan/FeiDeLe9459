@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using Dapper;
+using StudentScoreManagement.Models;
 
 namespace StudentScoreManagement
 {
@@ -25,5 +26,24 @@ namespace StudentScoreManagement
                 return conn.Query<T>(sql);
             }
         }
+
+        public static IEnumerable<StudentScore> QueryStudentScore(long? scoreId)
+        {
+//            string sql = "select score.Id,score.Course,score.Score,stu.Name from StudentScore score inner join Student stu on score.StudentId=stu.Id";
+            string sql = "select * from  StudentScore score left join Student stu on score.StudentId=stu.Id";
+            if (scoreId != null)
+            {
+                sql += " where score.Id=" + scoreId;
+            }
+            using (var conn = new SqlConnection(sqlStr))
+            {
+                return conn.Query<StudentScore,Student, StudentScore>(sql, (score, student) =>
+                {
+                    score.Student = student;
+                    return score;
+                });
+            }
+        }
+
     }
 }

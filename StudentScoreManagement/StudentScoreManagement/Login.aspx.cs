@@ -23,6 +23,17 @@ namespace StudentScoreManagement
                 HHWeb.Alert(this, "Incorrect username or password.");
                 return;
             }
+            Util.CurrentStudent = student;
+
+            Response.Redirect("Main.aspx");
+//            if (student.Name.ToLower() == "admin")
+//            {
+//
+//            }
+//            else
+//            {
+//                
+//            }
 
         }
     }
