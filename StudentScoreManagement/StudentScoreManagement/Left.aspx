@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
 </head>
-<body>
+<body style="background-color: #507CD1">
     <form id="form1" runat="server">
     <div>
         <asp:HyperLink ID="HyperLink1" runat="server" Target="rightFrame" NavigateUrl="~/ScoreEdit.aspx">New StudentScore</asp:HyperLink>

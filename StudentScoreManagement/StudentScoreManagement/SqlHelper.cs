@@ -27,13 +27,17 @@ namespace StudentScoreManagement
             }
         }
 
-        public static IEnumerable<StudentScore> QueryStudentScore(long? scoreId)
+        public static IEnumerable<StudentScore> QueryStudentScore(long? scoreId,long? studentId)
         {
 //            string sql = "select score.Id,score.Course,score.Score,stu.Name from StudentScore score inner join Student stu on score.StudentId=stu.Id";
-            string sql = "select * from  StudentScore score left join Student stu on score.StudentId=stu.Id";
+            string sql = "select * from  StudentScore score left join Student stu on score.StudentId=stu.Id where 1=1 ";
             if (scoreId != null)
             {
-                sql += " where score.Id=" + scoreId;
+                sql += " and score.Id=" + scoreId;
+            }
+            if (studentId != null)
+            {
+                sql += " and stu.Id=" + studentId;
             }
             using (var conn = new SqlConnection(sqlStr))
             {

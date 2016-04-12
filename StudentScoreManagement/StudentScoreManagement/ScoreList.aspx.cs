@@ -12,6 +12,12 @@ namespace StudentScoreManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Util.CurrentStudent == null)
+            {
+                Response.Write("<script> window.parent.location.href='Login.aspx'</script>");
+                return;
+            }
+
             if (Util.CurrentStudent.Name.ToLower() != "admin")
             {
                 panelSearch.Visible = false;
@@ -36,14 +42,22 @@ namespace StudentScoreManagement
 
         private void BindGridView()
         {
-
-            if (ddlStudent.SelectedItem.Value == "")
+            if (Util.CurrentStudent.Name == "admin")
             {
-                GridView1.DataSource = SqlHelper.QueryStudentScore(null); ;
+                if (ddlStudent.SelectedValue == "")
+                {
+                    GridView1.DataSource = SqlHelper.QueryStudentScore(null, null); 
+                }
+                else
+                {
+                    GridView1.DataSource = SqlHelper.QueryStudentScore(null, Convert.ToInt64(ddlStudent.SelectedValue)); 
+                }
             }
             else
             {
-                GridView1.DataSource = SqlHelper.QueryStudentScore(Convert.ToInt64(ddlStudent.SelectedItem.Value)); ;
+                GridView1.DataSource = SqlHelper.QueryStudentScore(null, Util.CurrentStudent.Id);
+                GridView1.Columns[4].Visible = false;
+                GridView1.Columns[5].Visible = false;
             }
           
             GridView1.DataKeyNames=new string[] {"Id"};
@@ -61,10 +75,7 @@ namespace StudentScoreManagement
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            if (ddlStudent.SelectedValue != "")
-            {
-
-            }
+            BindGridView();
         }
     }
 }
