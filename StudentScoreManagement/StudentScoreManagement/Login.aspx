@@ -16,9 +16,9 @@
         <div class="container form-horizontal">
 
             <div class="form-group row">
-                <label class="control-label col-md-4">Name</label>
+                <label class="control-label col-md-4">Number</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txtName" CssClass="form-control text-box single-line" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtNumber" CssClass="form-control text-box single-line" runat="server"></asp:TextBox>
                 </div>
             </div>
 

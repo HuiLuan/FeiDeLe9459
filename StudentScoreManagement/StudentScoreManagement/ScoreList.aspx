@@ -26,13 +26,14 @@
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="Id" HeaderText="Id" />
+                <asp:BoundField DataField="Student.Number" HeaderText="Number" />
                 <asp:BoundField DataField="Student.Name" HeaderText="Student" />
                 <asp:BoundField DataField="Course" HeaderText="Course" />
                 <asp:BoundField DataField="Score" HeaderText="Score" />
                 <asp:HyperLinkField DataNavigateUrlFields="Id" HeaderText="Edit"  Text="Edit" DataNavigateUrlFormatString="ScoreEdit.aspx?id={0}" />
                 <asp:TemplateField ShowHeader="False" HeaderText="Delete">
                     <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('confirm delete?')" Text="删除"></asp:LinkButton>
+                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('confirm delete?')" Text="Delete"></asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

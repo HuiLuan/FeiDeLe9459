@@ -17,7 +17,7 @@ namespace StudentScoreManagement
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            var student = SqlHelper.Query<Student>("select * from Student where Name='"+txtName.Text+"' and Password='"+txtPassword.Text+"'").FirstOrDefault();
+            var student = SqlHelper.Query<Student>("select * from Student where Number='"+txtNumber.Text+"' and Password='"+txtPassword.Text+"'").FirstOrDefault();
             if (student == null)
             {
                 HHWeb.Alert(this, "Incorrect username or password.");

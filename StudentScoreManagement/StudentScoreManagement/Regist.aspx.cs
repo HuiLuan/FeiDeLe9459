@@ -20,6 +20,11 @@ namespace StudentScoreManagement
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtNumber.Text.Trim()))
+            {
+                HHWeb.Alert(this, "Number can not empty");
+                return;
+            }
             if (string.IsNullOrEmpty(txtName.Text.Trim()))
             {
                 HHWeb.Alert(this,"Name can not empty");
@@ -30,7 +35,7 @@ namespace StudentScoreManagement
                 HHWeb.Alert(this,"Password can not empty");
                 return;
             }
-            var sql = "insert into Student (Name,Password) values ('" + txtName.Text.Trim() + "','" + txtPassword.Text.Trim() + "')";
+            var sql = "insert into Student (Name,Password,Number) values ('" + txtName.Text.Trim() + "','" + txtPassword.Text.Trim() + "','"+txtNumber.Text+"' )";
             SqlHelper.Execute(sql);
             HHWeb.Alert(this, "register succeed");
         }
