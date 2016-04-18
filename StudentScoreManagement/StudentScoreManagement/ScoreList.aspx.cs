@@ -56,8 +56,8 @@ namespace StudentScoreManagement
             else
             {
                 GridView1.DataSource = SqlHelper.QueryStudentScore(null, Util.CurrentStudent.Id);
-                GridView1.Columns[4].Visible = false;
                 GridView1.Columns[5].Visible = false;
+                GridView1.Columns[6].Visible = false;
             }
           
             GridView1.DataKeyNames=new string[] {"Id"};
