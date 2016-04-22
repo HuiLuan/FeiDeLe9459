@@ -1,4 +1,4 @@
-﻿@if (Request.IsAuthenticated)
+﻿@if (HttpContext.Current.Session["UserNumber"]!=null)
 {
     using (Html.BeginForm("SignOut", "Default", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
@@ -6,9 +6,11 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            hello, @User.Identity.Name
+            <a href="#"> hello, @HttpContext.Current.Session["UserNumber"]</a> 
           </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign Out</a></li>
+        <li>
+            <a href="/Default/SignOut">Sign Out</a>
+        </li>
     </ul>
     }
 }

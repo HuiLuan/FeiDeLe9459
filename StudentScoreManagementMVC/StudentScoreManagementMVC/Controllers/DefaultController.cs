@@ -18,40 +18,43 @@ namespace StudentScoreManagementMVC.Controllers
         //            return View();
         //        }
 
-        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
 
-        [AllowAnonymous]
+
         [HttpPost]
         public ActionResult Login(Student student)
         {
-            
-            return RedirectToAction("Index", "StudentScore");
+            if (db.Students.Any(x => x.Number == student.Number && x.Password == student.Password))
+            {
+                Session["UserNumber"] = student.Number;
+                return RedirectToAction("Index", "StudentScores");
+            }
+            else
+            {
+                return Content("用户名或密码错误");
+            }
         }
 
-
-
-        [AllowAnonymous]
         public ActionResult Signup()
         {
             return View();
         }
 
-        [AllowAnonymous]
+        [HttpPost]
         public ActionResult Signup(Student student)
         {
             db.Students.Add(student);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Login");
         }
 
-        [AllowAnonymous]
+
         public ActionResult SignOut()
         {
-            FormsAuthentication.SignOut();
+            Session["UserNumber"] = null;
             return RedirectToAction("Login", "Default");
         }
 
